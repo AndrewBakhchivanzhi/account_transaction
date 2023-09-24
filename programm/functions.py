@@ -15,12 +15,12 @@ def get_executed_operations(all_operations):
 
 filtered_operations = get_executed_operations(all_operations)
 
-def sort_by_date(filtered_operations):
+def sort_by_date(filtered_operations,last_list):
     sort_operation = sorted(filtered_operations, key=lambda operation: operation["date"])
     sorted_operation = sort_operation[::-1]
-    return sorted_operation[:5]
+    return sorted_operation[:last_list]
 
-sorted_operations = sort_by_date(filtered_operations)
+sorted_operations = sort_by_date(filtered_operations,5)
 
 def finish_operation(sorted_operations):
     for operation in sorted_operations:

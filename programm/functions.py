@@ -5,9 +5,9 @@ def get_operations(filename):
 
 all_operations = get_operations("operations.json")
 
-def get_executed_operations(all_operations):
+def get_executed_operations(some_operations):
     executed_operation = []
-    for operation in all_operations:
+    for operation in some_operations:
         for key in operation:
             if operation[key] == "EXECUTED":
                 executed_operation.append(operation)
@@ -15,15 +15,15 @@ def get_executed_operations(all_operations):
 
 filtered_operations = get_executed_operations(all_operations)
 
-def sort_by_date(filtered_operations,last_list):
-    sort_operation = sorted(filtered_operations, key=lambda operation: operation["date"])
+def sort_by_date(some_operations,last_list):
+    sort_operation = sorted(some_operations, key=lambda operation: operation["date"])
     sorted_operation = sort_operation[::-1]
     return sorted_operation[:last_list]
 
 sorted_operations = sort_by_date(filtered_operations,5)
 
-def finish_operation(sorted_operations):
-    for operation in sorted_operations:
+def finish_operation(some_operations):
+    for operation in some_operations:
         bad_date = operation['date']
         only_date = bad_date[:10]
         splitted_date = only_date.split('-')

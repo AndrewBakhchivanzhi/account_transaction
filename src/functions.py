@@ -16,9 +16,8 @@ def get_executed_operations(some_operations):
 filtered_operations = get_executed_operations(all_operations)
 
 def sort_by_date(some_operations,last_list):
-    sort_operation = sorted(some_operations, key=lambda operation: operation["date"])
-    sorted_operation = sort_operation[::-1]
-    return sorted_operation[:last_list]
+    sort_operation = sorted(some_operations, key=lambda operation: operation["date"], reverse=True)
+    return sort_operation[:last_list]
 
 sorted_operations = sort_by_date(filtered_operations,5)
 

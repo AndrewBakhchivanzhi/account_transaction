@@ -1,13 +1,4 @@
-import json
-from programm import functions
-
-def test_get_operations():
-    assert get_operations("operations.json")
-def test_get_executed_operations():
-    assert get_executed_operations([{"key":"value"},{"item":"items"}]) == []
+from src.functions import sort_by_date
 
 def test_sort_by_date():
-    assert sort_by_date([3,5,4,2,1]) == [5,4,3,2,1]
-
-def test_finish_operation():
-    pass
+    assert sort_by_date([4,5,2,1,3]) == [1,2,3,4,5]

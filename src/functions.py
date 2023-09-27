@@ -23,12 +23,11 @@ sorted_operations = sort_by_date(filtered_operations,5)
 
 def finish_operation(some_operations):
     for operation in some_operations:
-        bad_date = operation['date']
-        only_date = bad_date[:10]
-        splitted_date = only_date.split('-')
-        date = '.'.join(splitted_date[::-1])
-        keys = operation.keys()
-        if 'from' in keys:
+        def date(some_date):
+            only_date = some_date[:10]
+            splitted_date = only_date.split('-')
+            return '.'.join(splitted_date[::-1])
+        if 'from' in operation:
             var_1 = operation["from"]
             var_2 = operation["to"]
             if var_1.lower().startswith("счет"):
@@ -43,7 +42,7 @@ def finish_operation(some_operations):
             else:
                 to1 = var_2.split()
                 to = f"{to1[-1][:4]} {to1[-1][4:6]}** **** {to1[-1][-4:]}"
-            print(f"""{date} {operation["description"]}
+            print(f"""{date(operation['date'])} {operation["description"]}
 {" ".join(from1[:-1])} {from_} -> {" ".join(to1[:-1])} {to}
 {operation["operationAmount"]["amount"]} {operation["operationAmount"]["currency"]["name"]}
 """)
@@ -55,7 +54,7 @@ def finish_operation(some_operations):
             else:
                 to1 = var_2.split()
                 to = f"{to1[-1][:4]} {to1[-1][4:6]}** **** {to1[-1][-4:]}"
-            print(f"""{date} {operation["description"]}
+            print(f"""{date(operation['date'])} {operation["description"]}
 {" ".join(to1[:-1])} {to}
 {operation["operationAmount"]["amount"]} {operation["operationAmount"]["currency"]["name"]}
 """)

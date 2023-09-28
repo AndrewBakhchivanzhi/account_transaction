@@ -1,16 +1,8 @@
-# This is a sample Python script.
+from src.functions import get_executed_operations,get_operations,sort_by_date,finish_operation
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+all_operations = get_operations("src/operations.json")
+filtered_operations = get_executed_operations(all_operations)
+sorted_operations = sort_by_date(filtered_operations,5)
+print(finish_operation(sorted_operations))
+for operation in finish_operation(sorted_operations):
+    print(operation)

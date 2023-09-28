@@ -3,8 +3,6 @@ def get_operations(filename):
     with open(filename, "r", encoding='utf-8') as file:
         return json.load(file)
 
-all_operations = get_operations("operations.json")
-
 def get_executed_operations(some_operations):
     executed_operation = []
     for operation in some_operations:
@@ -13,20 +11,16 @@ def get_executed_operations(some_operations):
                 executed_operation.append(operation)
     return executed_operation
 
-filtered_operations = get_executed_operations(all_operations)
-
-def sort_by_date(some_operations,last_list):
+def sort_by_date(some_operations,last_list=5):
     sort_operation = sorted(some_operations, key=lambda operation: operation["date"], reverse=True)
     return sort_operation[:last_list]
 
-sorted_operations = sort_by_date(filtered_operations,5)
-
 def finish_operation(some_operations):
+    all_operations =[]
     for operation in some_operations:
-        def date(some_date):
-            only_date = some_date[:10]
-            splitted_date = only_date.split('-')
-            return '.'.join(splitted_date[::-1])
+        only_date = operation["date"][:10]
+        splitted_date = only_date.split('-')
+        date = '.'.join(splitted_date[::-1])
         if 'from' in operation:
             var_1 = operation["from"]
             var_2 = operation["to"]
@@ -42,7 +36,7 @@ def finish_operation(some_operations):
             else:
                 to1 = var_2.split()
                 to = f"{to1[-1][:4]} {to1[-1][4:6]}** **** {to1[-1][-4:]}"
-            print(f"""{date(operation['date'])} {operation["description"]}
+            all_operations.append(f"""{date} {operation["description"]}
 {" ".join(from1[:-1])} {from_} -> {" ".join(to1[:-1])} {to}
 {operation["operationAmount"]["amount"]} {operation["operationAmount"]["currency"]["name"]}
 """)
@@ -54,9 +48,10 @@ def finish_operation(some_operations):
             else:
                 to1 = var_2.split()
                 to = f"{to1[-1][:4]} {to1[-1][4:6]}** **** {to1[-1][-4:]}"
-            print(f"""{date(operation['date'])} {operation["description"]}
+            all_operations.append(f"""{date} {operation["description"]}
 {" ".join(to1[:-1])} {to}
 {operation["operationAmount"]["amount"]} {operation["operationAmount"]["currency"]["name"]}
 """)
+    return all_operations
 
-finish_operation(sorted_operations)
+

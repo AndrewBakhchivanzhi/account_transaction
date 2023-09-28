@@ -33,7 +33,7 @@ operations = [{
     }
 ]
 
-operation = ['08.12.2019 Открытие вклада\nСчет **5907\n41096.24 USD\n', '07.12.2019 Перевод организации\nVisa Classic 2842 87** **** 9012 -> Счет **3655\n48150.39 USD\n']
+operation = [{'id': 863064926, 'state': 'EXECUTED', 'date': '2019-12-08T22:46:21.935582', 'operationAmount': {'amount': '41096.24', 'currency': {'name': 'USD', 'code': 'USD'}}, 'description': 'Открытие вклада', 'to': 'Счет 90424923579946435907'}]
 def test_get_operations():
     assert type(get_operations("../src/operations.json")) == list
 def test_get_executed_operations():
@@ -85,6 +85,4 @@ def test_sort_by_date():
     }]
 
 def test_finish_operations():
-    assert finish_operation(operation) == 08.12.2019 Открытие вклада
-Счет **5907
-41096.24 USD
+    assert finish_operation(operation) == ['08.12.2019 Открытие вклада\nСчет **5907\n41096.24 USD\n']
